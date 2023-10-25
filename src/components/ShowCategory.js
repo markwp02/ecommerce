@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { setSelected } from "../store";
 
 function ShowCategory({ children, className, activeClassName }) {
-    const selected = useSelector((state) => state.categories);
+    const category = useSelector((state) => state.categories);
     const dispatch = useDispatch()
 
     
@@ -11,7 +11,7 @@ function ShowCategory({ children, className, activeClassName }) {
         dispatch(setSelected(children))
     };
 
-    const isActive = selected.selected === children;
+    const isActive = category.selected === children;
 
     const classes = classNames(
         'text-blue-500', 

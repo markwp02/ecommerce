@@ -3,7 +3,7 @@ import ShowCategory from "./ShowCategory";
 
 function Sidebar() {
 
-    const {data, error, isFetching} = useFetchProductCategoriesQuery()
+    const {data, error, isFetching} = useFetchProductCategoriesQuery();
 
     let content;
     if (isFetching) {

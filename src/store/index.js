@@ -16,5 +16,5 @@ export const store = configureStore({
 
 setupListeners(store.dispatch);
 
-export { useFetchProductsQuery, useFetchProductCategoriesQuery } from './apis/productsApi';
+export { useFetchProductsQuery, useFetchProductCategoriesQuery, useFetchProductsByCategoryQuery } from './apis/productsApi';
 export { setSelected } from './slices/categoriesSlice';

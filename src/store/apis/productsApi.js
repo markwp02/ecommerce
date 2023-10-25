@@ -18,8 +18,19 @@ const productsApi = createApi({
             fetchProductCategories: builder.query({
                 query: () => {
                     return {
-                        url: '/productItems/category',
+                        url: '/productCategories',
                         method: 'GET'
+                    };
+                },
+            }),
+            fetchProductsByCategory: builder.query({
+                query: (category) => {
+                    return {
+                        url: '/productItems/category',
+                        method: 'GET',
+                        params: {
+                            category: category
+                        },
                     };
                 },
             }),
@@ -27,5 +38,5 @@ const productsApi = createApi({
     },
 });
 
-export const { useFetchProductsQuery, useFetchProductCategoriesQuery } = productsApi;
+export const { useFetchProductsQuery, useFetchProductCategoriesQuery, useFetchProductsByCategoryQuery } = productsApi;
 export { productsApi };

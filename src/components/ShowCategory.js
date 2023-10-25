@@ -1,17 +1,22 @@
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import classNames from 'classnames';
+import { setSelected } from "../store";
 
 function ShowCategory({ children, className, activeClassName }) {
-    const [activeCategory, setActiveCategory] = useState(false);
+    const selected = useSelector((state) => state.categories);
+    const dispatch = useDispatch()
+
     
     const handleClick = () => {
-        setActiveCategory(!activeCategory);
+        dispatch(setSelected(children))
     };
+
+    const isActive = selected.selected === children;
 
     const classes = classNames(
         'text-blue-500', 
         className,
-        activeCategory && activeClassName
+        isActive && activeClassName
     );
 
     return <div className={classes} onClick={handleClick}>{children}</div>;

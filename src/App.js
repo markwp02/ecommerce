@@ -1,20 +1,12 @@
-import { useFetchProductCategoriesQuery } from "./store";
+import Sidebar from "./components/Sidebar";
 
 function App() {
-    const {data, error, isFetching} = useFetchProductCategoriesQuery()
 
-    let content;
-    if (isFetching) {
-        content = <div>Is Loading categories</div>
-    } else if (error) {
-        content = <div>Error loading categories.</div>
-    } else {
-        content = data.map(category => {
-            return <div key={category}>{category}</div>
-        });    
-    }
-
-    return <div>{content}</div>
+    return (
+        <div className="container mx-auto grid grid-cols-6 gap-4 mt-4">
+            <Sidebar />
+        </div>
+    );
 };
 
 export default App;

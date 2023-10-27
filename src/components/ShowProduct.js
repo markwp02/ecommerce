@@ -10,7 +10,7 @@ function ShowProduct({children}) {
     return (
     <div className="card">
         <div className="card-image">
-            <img alt={children.productName} src={`https://picsum.photos/seed/${children.productId}/400/300`}/>
+            <img alt={children.productName} src={children.productUrl}/>
         </div>
         <div className="card-content">
             <div className="media">

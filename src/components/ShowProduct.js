@@ -4,7 +4,7 @@ function ShowProduct({children}) {
     if(children.productStock === 0) {
         content = "Out of Stock"; 
     } else {
-        content = "$" + children.productPrice;
+        content = "$" + children.productPrice.toFixed(2);
     }
     
     return (

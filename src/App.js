@@ -1,6 +1,8 @@
 import Navbar from "./components/Navbar";
 import ProductsList from "./components/ProductsList";
 import Sidebar from "./components/Sidebar";
+import Route from "./components/Route";
+import ProductDetails from "./components/ProductDetails";
 
 function App() {
 
@@ -12,7 +14,12 @@ function App() {
                     <Sidebar />
                 </div>
                 <div className="column is-three-quarters">
-                    <ProductsList />
+                    <Route path="/">
+                        <ProductsList />
+                    </Route>
+                    <Route path="/productdetails">
+                        <ProductDetails />
+                    </Route>
                 </div>
             </div>
         </div>

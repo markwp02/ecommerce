@@ -1,4 +1,11 @@
+import useNavigation from '../hooks/use-navigation';
+import { useDispatch } from 'react-redux';
+import { setSelectedProduct } from '../store';
+
 function ShowProduct({children}) {
+    const { navigate } = useNavigation();
+    const dispatch = useDispatch();
+
     
     let content;
     if(children.productStock === 0) {
@@ -6,9 +13,15 @@ function ShowProduct({children}) {
     } else {
         content = "$" + children.productPrice.toFixed(2);
     }
-    
+
+    const handleClick = (event) => {
+        event.preventDefault();
+        dispatch(setSelectedProduct(children));
+        navigate("/productdetails");
+    };
+
     return (
-    <div className="card">
+    <a href={"/productdetails"} className="card cursor-pointer" onClick={handleClick}>
         <div className="card-image">
             <img alt={children.productName} src={children.productUrl}/>
         </div>
@@ -22,7 +35,7 @@ function ShowProduct({children}) {
                 {content}
             </div>
         </div>
-    </div>
+    </a>
     );
 };
 

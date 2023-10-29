@@ -14,7 +14,7 @@ function ProductDetails() {
                     </div>
                 </div>
                 <div className="card-image">
-                    <img className="max-w-xl" alt={selectedProduct.productName} src={selectedProduct.productUrl}/>
+                    <img className="max-w-xl" alt={selectedProduct.productName} src={selectedProduct.productImageUrl}/>
                 </div>
                 <div className="content">
                     <p>{selectedProduct.productDescription}</p>

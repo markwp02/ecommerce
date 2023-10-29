@@ -21,9 +21,9 @@ function ShowProduct({children}) {
     };
 
     return (
-    <a href={"/productdetails"} className="card cursor-pointer" onClick={handleClick}>
+    <div className="card cursor-pointer" onClick={handleClick}>
         <div className="card-image">
-            <img alt={children.productName} src={children.productUrl}/>
+            <img alt={children.productName} src={children.productImageUrl}/>
         </div>
         <div className="card-content">
             <div className="media">
@@ -35,7 +35,7 @@ function ShowProduct({children}) {
                 {content}
             </div>
         </div>
-    </a>
+    </div>
     );
 };
 

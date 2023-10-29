@@ -1,14 +1,17 @@
+import useNavigation from '../hooks/use-navigation';
 import { useSelector, useDispatch } from "react-redux";
 import classNames from 'classnames';
 import { setSelected } from "../store";
 
 function ShowCategory({ children, className, activeClassName }) {
+    const { navigate } = useNavigation();
     const category = useSelector((state) => state.categories);
     const dispatch = useDispatch()
 
     
     const handleClick = () => {
         dispatch(setSelected(children))
+        navigate("/");
     };
 
     const isActive = category.selected === children;

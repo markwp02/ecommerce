@@ -14,10 +14,10 @@ function App() {
                     <Sidebar />
                 </div>
                 <div className="column is-three-quarters">
-                    <Route path="/">
+                    <Route regexPath="^/$">
                         <ProductsList />
                     </Route>
-                    <Route path="/productdetails">
+                    <Route regexPath="^/productdetails/[0123456789]+$">
                         <ProductDetails />
                     </Route>
                 </div>

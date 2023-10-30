@@ -34,9 +34,17 @@ const productsApi = createApi({
                     };
                 },
             }),
+            fetchProductById: builder.query({
+                query: (productId) => {
+                    return {
+                        url: `/productItems/${productId}`,
+                        method: 'GET',
+                    };
+                },
+            }),
         };
     },
 });
 
-export const { useFetchProductsQuery, useFetchProductCategoriesQuery, useFetchProductsByCategoryQuery } = productsApi;
+export const { useFetchProductsQuery, useFetchProductCategoriesQuery, useFetchProductsByCategoryQuery, useFetchProductByIdQuery } = productsApi;
 export { productsApi };

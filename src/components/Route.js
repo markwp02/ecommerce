@@ -1,12 +1,11 @@
 import useNavigation from "../hooks/use-navigation";
 
-function Route({ path, children }) {
+function Route({ regexPath, children }) {
     const { currentPath } = useNavigation();
 
-    if(path === currentPath) {
+    if(currentPath.match(regexPath) != null) {
         return children;
     }
-
     return null;
 }
 

@@ -20,4 +20,4 @@ setupListeners(store.dispatch);
 
 export { useFetchProductsQuery, useFetchProductCategoriesQuery, useFetchProductsByCategoryQuery, useFetchProductByIdQuery } from './apis/productsApi';
 export { setSelected } from './slices/categoriesSlice';
-export { addToCart } from './slices/cartSlice';
+export { addToCart, updateProductQuantity } from './slices/cartSlice';

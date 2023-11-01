@@ -17,6 +17,15 @@ export const cartSlice = createSlice({
             state.productsInCart[indexFound].quantity++;
         }
     },
+    updateProductQuantity: (state, action) => {
+        let {productId, quantity} = action.payload;
+        state.productsInCart.map((product) => {
+            if(product.productId === productId) {
+                product.quantity = quantity;
+            }
+            return product;
+        });
+    },
   },
 });
 
@@ -39,6 +48,6 @@ const isProductInCart = (productsInCart, product) => {
 };
 
 // Action creators are generated for each case reducer function
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, updateProductQuantity } = cartSlice.actions;
 
 export default cartSlice.reducer;

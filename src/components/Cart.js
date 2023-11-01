@@ -1,14 +1,20 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { updateProductQuantity } from "../store";
 
 
 function Cart() {
     const cart = useSelector((state) => state.cart);
+    const dispatch = useDispatch();
+
+    const handleEdit = (productId, quantity) => {
+        dispatch(updateProductQuantity({productId, quantity}));
+      };
 
     let tableRows = cart.productsInCart.map(product => {
         return (
             <tr key={product.productId}>
                 <td>{product.productName}</td>
-                <td>{product.quantity}</td>
+                <td><input type="number" min="0" value={product.quantity} onChange={(e) => handleEdit(product.productId, e.target.value)} /></td>
                 <td>${(product.productPrice * product.quantity).toFixed(2)}</td>
             </tr>
         );
@@ -18,21 +24,24 @@ function Cart() {
 
     return (
         <div>
+            <p className="title">Shopping Cart</p>
             <table className="table">
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Quantity</th>
-                        <th>Price</th>
+                        <th>Subtotal</th>
                     </tr>
                 </thead>
                 <tbody>
                     {tableRows}
                 </tbody>
                 <tfoot>
-                    <th />
-                    <th />
-                    <th>${totalPrice.toFixed(2)}</th>
+                    <tr>
+                        <th />
+                        <th>Total</th>
+                        <th>${totalPrice.toFixed(2)}</th>
+                    </tr>
                 </tfoot>
             </table>
             

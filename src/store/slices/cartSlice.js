@@ -19,6 +19,7 @@ export const cartSlice = createSlice({
     },
     updateProductQuantity: (state, action) => {
         let {productId, quantity} = action.payload;
+
         state.productsInCart.map((product) => {
             if(product.productId === productId) {
                 product.quantity = quantity;
@@ -26,6 +27,12 @@ export const cartSlice = createSlice({
             return product;
         });
     },
+    removeProductFromCart: (state, action) => {
+        let targetId = action.payload;
+        state.productsInCart = state.productsInCart.filter((product) => {
+            return product.productId !== targetId;
+        });
+    }
   },
 });
 
@@ -38,7 +45,6 @@ const isProductInCart = (productsInCart, product) => {
     }
 
     for(let index = 0; index < productsInCart.length; index++) {
-        console.log("Within loop: " + index);
         if( productsInCart[index].productName === product.productName) {
             indexFound = index;
             break;
@@ -48,6 +54,6 @@ const isProductInCart = (productsInCart, product) => {
 };
 
 // Action creators are generated for each case reducer function
-export const { addToCart, updateProductQuantity } = cartSlice.actions;
+export const { addToCart, updateProductQuantity, removeProductFromCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

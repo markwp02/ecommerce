@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { updateProductQuantity } from "../store";
+import { updateProductQuantity, removeProductFromCart } from "../store";
 
 
 function Cart() {
@@ -8,7 +8,11 @@ function Cart() {
 
     const handleEdit = (productId, quantity) => {
         dispatch(updateProductQuantity({productId, quantity}));
-      };
+    };
+
+    const handleClick = (productId) => {
+        dispatch(removeProductFromCart(productId));
+    };
 
     let tableRows = cart.productsInCart.map(product => {
         return (
@@ -16,6 +20,7 @@ function Cart() {
                 <td>{product.productName}</td>
                 <td><input type="number" min="0" value={product.quantity} onChange={(e) => handleEdit(product.productId, e.target.value)} /></td>
                 <td>${(product.productPrice * product.quantity).toFixed(2)}</td>
+                <td><button className="delete" onClick={(p) => handleClick(product.productId)} /></td>
             </tr>
         );
     });

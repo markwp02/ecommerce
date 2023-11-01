@@ -6,11 +6,11 @@ import { setSelected } from "../store";
 function ShowCategory({ children, className, activeClassName }) {
     const { navigate } = useNavigation();
     const category = useSelector((state) => state.categories);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
 
     
     const handleClick = () => {
-        dispatch(setSelected(children))
+        dispatch(setSelected(children));
         navigate("/");
     };
 

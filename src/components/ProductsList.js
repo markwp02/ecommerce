@@ -5,6 +5,7 @@ import ShowProduct from "./ShowProduct";
 function ProductsList() {
 
     const category = useSelector((state) => state.categories);
+    const search = useSelector((state) => state.search);
     const {data, error, isFetching} = useFetchProductsByCategoryQuery(category.selected);
 
     let content;
@@ -13,7 +14,10 @@ function ProductsList() {
     } else if (error) {
         content = <div>Error loading products.</div>
     } else {
-        content = data.map(product => {
+        let filteredProducts = data.filter((product) => {
+            return product.productName.toLowerCase().includes(search.searchTerm.toLowerCase());
+        });
+        content = filteredProducts.map(product => {
             return <ShowProduct key={product.productId}>{product}</ShowProduct>
         });
     }

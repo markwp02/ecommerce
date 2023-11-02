@@ -1,5 +1,8 @@
 import { useSelector } from 'react-redux';
 import useNavigation from '../hooks/use-navigation';
+import SearchProduct from './SearchProduct';
+import { GoGlobe } from "react-icons/go";
+
 
 function Navbar() {
     const { navigate } = useNavigation();
@@ -14,8 +17,11 @@ function Navbar() {
 
     return (
         <div className="navbar">
-            <div className="navbar-brand">
-                eCommerce
+            <div className="navbar-item">
+                eCommerce <GoGlobe />
+            </div>
+            <div className="navbar-item">
+                <SearchProduct />
             </div>
             <div className="navbar-end">
                 <div className="navbar-item">

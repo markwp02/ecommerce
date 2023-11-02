@@ -18,7 +18,7 @@ function Cart() {
         return (
             <tr key={product.productId}>
                 <td>{product.productName}</td>
-                <td><input type="number" min="0" value={product.quantity} onChange={(e) => handleEdit(product.productId, e.target.value)} /></td>
+                <td><input type="number" min="0" max={product.productStock} value={product.quantity} onChange={(e) => handleEdit(product.productId, e.target.value)} /></td>
                 <td>${(product.productPrice * product.quantity).toFixed(2)}</td>
                 <td><button className="delete" onClick={(p) => handleClick(product.productId)} /></td>
             </tr>

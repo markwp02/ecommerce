@@ -19,6 +19,9 @@ function ProductDetails() {
 
     const outOfStock = data.productStock === 0 ? true : false;
 
+    const lowStockLimit = 10;
+    const lowStock = data.productStock < lowStockLimit ? true : false;
+
     const onAddToCartClick = () => {
         dispatch(addToCart(data));
     };
@@ -37,6 +40,7 @@ function ProductDetails() {
                 <div className="content">
                     <p>{data.productDescription}</p>
                     <p>${data.productPrice.toFixed(2)}</p>
+                    {lowStock && <p>Low Stock ({data.productStock})</p>}
                     {outOfStock && <p>Out of Stock</p>}
                 </div>
                 <div className="buttons">

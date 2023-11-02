@@ -13,8 +13,10 @@ export const cartSlice = createSlice({
 
         if(indexFound === notInList) {
             state.productsInCart.push(productForCart);
-        } else {
+        } else if(productForCart.productStock > state.productsInCart[indexFound].quantity){
             state.productsInCart[indexFound].quantity++;
+        } else {
+            console.warn("Attempted to add more items then is in stock");
         }
     },
     updateProductQuantity: (state, action) => {

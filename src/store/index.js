@@ -20,7 +20,7 @@ export const store = configureStore({
 
 setupListeners(store.dispatch);
 
-export { useFetchProductsQuery, useFetchProductCategoriesQuery, useFetchProductsByCategoryQuery, useFetchProductByIdQuery } from './apis/productsApi';
+export { useFetchProductCategoriesQuery, useFetchProductsByCategoryQuery, useFetchProductByIdQuery } from './apis/productsApi';
 export { setSelected } from './slices/categoriesSlice';
 export { addToCart, updateProductQuantity, removeProductFromCart } from './slices/cartSlice';
 export { setSearchTerm } from './slices/searchSlice';

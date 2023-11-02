@@ -7,14 +7,6 @@ const productsApi = createApi({
     }),
     endpoints(builder) {
         return {
-            fetchProducts: builder.query({
-                query: () => {
-                    return {
-                        url: '/productItems',
-                        method: 'GET'
-                    };
-                },
-            }),
             fetchProductCategories: builder.query({
                 query: () => {
                     return {
@@ -46,5 +38,5 @@ const productsApi = createApi({
     },
 });
 
-export const { useFetchProductsQuery, useFetchProductCategoriesQuery, useFetchProductsByCategoryQuery, useFetchProductByIdQuery } = productsApi;
+export const { useFetchProductCategoriesQuery, useFetchProductsByCategoryQuery, useFetchProductByIdQuery } = productsApi;
 export { productsApi };

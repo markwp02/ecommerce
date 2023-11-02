@@ -17,6 +17,8 @@ function ProductDetails() {
         return <div>Error loading product</div>
     } 
 
+    const outOfStock = data.productStock === 0 ? true : false;
+
     const onAddToCartClick = () => {
         dispatch(addToCart(data));
     };
@@ -35,9 +37,10 @@ function ProductDetails() {
                 <div className="content">
                     <p>{data.productDescription}</p>
                     <p>${data.productPrice.toFixed(2)}</p>
+                    {outOfStock && <p>Out of Stock</p>}
                 </div>
                 <div className="buttons">
-                        <button className="button is-primary is-light" onClick={onAddToCartClick}>
+                        <button disabled={outOfStock} className="button is-primary is-light" onClick={onAddToCartClick}>
                            Add To Cart
                         </button>
                     </div>

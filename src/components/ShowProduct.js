@@ -4,12 +4,7 @@ function ShowProduct({children}) {
     const { navigate } = useNavigation();
     let productPath = `/productdetails/${children.productId}`;
 
-    let content;
-    if(children.productStock === 0) {
-        content = "Out of Stock"; 
-    } else {
-        content = "$" + children.productPrice.toFixed(2);
-    }
+    const outOfStock = children.productStock === 0 ? true : false;
 
     const handleClick = (event) => {
         if (event.metaKey || event.ctrlKey) {
@@ -31,7 +26,8 @@ function ShowProduct({children}) {
                 </div>
             </div>
             <div className="content">
-                {content}
+                ${children.productPrice.toFixed(2)}
+                {outOfStock && <p>Out of Stock</p>}
             </div>
         </div>
     </a>

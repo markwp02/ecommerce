@@ -16,11 +16,11 @@ function ProductDetails() {
     } else if (error) {
         return <div>Error loading product</div>
     } 
-
-    const outOfStock = data.productStock === 0 ? true : false;
-
     const lowStockLimit = 10;
-    const lowStock = data.productStock < lowStockLimit ? true : false;
+    const outOfStockLimit = 0;
+    const outOfStock = data.productStock === outOfStockLimit ? true : false;
+
+    const lowStock = data.productStock < lowStockLimit && data.productStock > outOfStockLimit ? true : false;
 
     const onAddToCartClick = () => {
         dispatch(addToCart(data));

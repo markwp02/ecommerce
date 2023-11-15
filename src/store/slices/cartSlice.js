@@ -3,51 +3,51 @@ import { createSlice } from '@reduxjs/toolkit'
 export const cartSlice = createSlice({
   name: 'cart',
   initialState: {
-    productsInCart: [],
+    orderProductsList: [],
   },
   reducers: {
     addToCart: (state, action) => {
-        const productForCart = Object.assign({quantity: 1}, action.payload);
+        const orderProduct = {productQuantity: 1, product: action.payload};
         const notInList = -1
-        let indexFound = isProductInCart(state.productsInCart, productForCart);
+        let indexFound = isProductInCart(state.orderProductsList, orderProduct.product);
 
         if(indexFound === notInList) {
-            state.productsInCart.push(productForCart);
-        } else if(productForCart.productStock > state.productsInCart[indexFound].quantity){
-            state.productsInCart[indexFound].quantity++;
+            state.orderProductsList.push( orderProduct );
+        } else if(orderProduct.product.productStock > state.orderProductsList[indexFound].productQuantity){
+            state.orderProductsList[indexFound].productQuantity++;
         } else {
             console.warn("Attempted to add more items then is in stock");
         }
     },
     updateProductQuantity: (state, action) => {
-        let {productId, quantity} = action.payload;
+        let {productId, newProductQuantity} = action.payload;
 
-        state.productsInCart.map((product) => {
-            if(product.productId === productId) {
-                product.quantity = quantity;
+        state.orderProductsList.map((orderProduct) => {
+            if(orderProduct.product.productId === productId) {
+                orderProduct.productQuantity = newProductQuantity;
             }
-            return product;
+            return orderProduct;
         });
     },
     removeProductFromCart: (state, action) => {
         let targetId = action.payload;
-        state.productsInCart = state.productsInCart.filter((product) => {
-            return product.productId !== targetId;
+        state.orderProductsList = state.orderProductsList.filter((orderProduct) => {
+            return orderProduct.product.productId !== targetId;
         });
     }
   },
 });
 
-const isProductInCart = (productsInCart, product) => {
+const isProductInCart = (orderProductsList, product) => {
     const notInList = -1
     let indexFound = notInList;
 
-    if(productsInCart.length === 0) {
+    if(orderProductsList.length === 0) {
         return notInList;
     }
 
-    for(let index = 0; index < productsInCart.length; index++) {
-        if( productsInCart[index].productName === product.productName) {
+    for(let index = 0; index < orderProductsList.length; index++) {
+        if( orderProductsList[index].product.productName === product.productName) {
             indexFound = index;
             break;
         }

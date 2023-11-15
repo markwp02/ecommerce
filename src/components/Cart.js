@@ -10,22 +10,22 @@ function Cart() {
         dispatch(updateProductQuantity({productId, quantity}));
     };
 
-    const handleClick = (productId) => {
+    const handleDeleteClick = (productId) => {
         dispatch(removeProductFromCart(productId));
     };
 
-    let tableRows = cart.productsInCart.map(product => {
+    let tableRows = cart.orderProductsList.map(orderProduct => {
         return (
-            <tr key={product.productId}>
-                <td>{product.productName}</td>
-                <td><input type="number" min="0" max={product.productStock} value={product.quantity} onChange={(e) => handleEdit(product.productId, e.target.value)} /></td>
-                <td>${(product.productPrice * product.quantity).toFixed(2)}</td>
-                <td><button className="delete" onClick={(p) => handleClick(product.productId)} /></td>
+            <tr key={orderProduct.product.productId}>
+                <td>{orderProduct.product.productName}</td>
+                <td><input type="number" min="0" max={orderProduct.product.productStock} value={orderProduct.productQuantity} onChange={(e) => handleEdit(orderProduct.product.productId, e.target.value)} /></td>
+                <td>${(orderProduct.product.productPrice * orderProduct.productQuantity).toFixed(2)}</td>
+                <td><button className="delete" onClick={(p) => handleDeleteClick(orderProduct.product.productId)} /></td>
             </tr>
         );
     });
 
-    let totalPrice = cart.productsInCart.reduce((total, product) => total+= product.productPrice * product.quantity, 0);
+    let totalPrice = cart.orderProductsList.reduce((total, orderProduct) => total+= orderProduct.product.productPrice * orderProduct.productQuantity, 0);
 
     return (
         <div>

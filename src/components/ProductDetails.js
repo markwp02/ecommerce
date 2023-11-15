@@ -16,10 +16,10 @@ function ProductDetails() {
     } else if (error) {
         return <div>Error loading product</div>
     } 
+
     const lowStockLimit = 10;
     const outOfStockLimit = 0;
     const outOfStock = data.productStock === outOfStockLimit ? true : false;
-
     const lowStock = data.productStock < lowStockLimit && data.productStock > outOfStockLimit ? true : false;
 
     const onAddToCartClick = () => {

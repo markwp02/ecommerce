@@ -7,14 +7,14 @@ export const cartSlice = createSlice({
   },
   reducers: {
     addToCart: (state, action) => {
-        const orderProduct = {productQuantity: 1, product: action.payload};
+        const orderProduct = {orderProductQuantity: 1, product: action.payload};
         const notInList = -1
         let indexFound = isProductInCart(state.orderProductsList, orderProduct.product);
 
         if(indexFound === notInList) {
             state.orderProductsList.push( orderProduct );
-        } else if(orderProduct.product.productStock > state.orderProductsList[indexFound].productQuantity){
-            state.orderProductsList[indexFound].productQuantity++;
+        } else if(orderProduct.product.productStock > state.orderProductsList[indexFound].orderProductQuantity){
+            state.orderProductsList[indexFound].orderProductQuantity++;
         } else {
             console.warn("Attempted to add more items then is in stock");
         }
@@ -24,7 +24,7 @@ export const cartSlice = createSlice({
 
         state.orderProductsList.map((orderProduct) => {
             if(orderProduct.product.productId === productId) {
-                orderProduct.productQuantity = newProductQuantity;
+                orderProduct.orderProductQuantity = newProductQuantity;
             }
             return orderProduct;
         });

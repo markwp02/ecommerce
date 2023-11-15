@@ -1,31 +1,41 @@
 import { useSelector, useDispatch } from "react-redux";
 import { updateProductQuantity, removeProductFromCart } from "../store";
+import { useAddCustomerOrderMutation } from "../store";
 
 
 function Cart() {
     const cart = useSelector((state) => state.cart);
+    const [addCustomerOrder, results] = useAddCustomerOrderMutation();
     const dispatch = useDispatch();
 
-    const handleEdit = (productId, quantity) => {
-        dispatch(updateProductQuantity({productId, quantity}));
+    const handleEdit = (productId, newProductQuantity) => {
+        dispatch(updateProductQuantity({productId, newProductQuantity}));
+    };
+
+    const handleBuyClick = () => {
+        let totalPrice = calculateTotalPrice();
+        addCustomerOrder({ customerOrderTotalPrice: totalPrice, orderProducts: cart.orderProductsList});
     };
 
     const handleDeleteClick = (productId) => {
         dispatch(removeProductFromCart(productId));
     };
 
+    const calculateTotalPrice = () => {
+        let totalPrice = cart.orderProductsList.reduce((total, orderProduct) => total+= orderProduct.product.productPrice * orderProduct.orderProductQuantity, 0);
+        return totalPrice.toFixed(2);
+    }
+
     let tableRows = cart.orderProductsList.map(orderProduct => {
         return (
             <tr key={orderProduct.product.productId}>
                 <td>{orderProduct.product.productName}</td>
-                <td><input type="number" min="0" max={orderProduct.product.productStock} value={orderProduct.productQuantity} onChange={(e) => handleEdit(orderProduct.product.productId, e.target.value)} /></td>
-                <td>${(orderProduct.product.productPrice * orderProduct.productQuantity).toFixed(2)}</td>
+                <td><input type="number" min="0" max={orderProduct.product.productStock} value={orderProduct.orderProductQuantity} onChange={(e) => handleEdit(orderProduct.product.productId, e.target.value)} /></td>
+                <td>${(orderProduct.product.productPrice * orderProduct.orderProductQuantity).toFixed(2)}</td>
                 <td><button className="delete" onClick={(p) => handleDeleteClick(orderProduct.product.productId)} /></td>
             </tr>
         );
     });
-
-    let totalPrice = cart.orderProductsList.reduce((total, orderProduct) => total+= orderProduct.product.productPrice * orderProduct.productQuantity, 0);
 
     return (
         <div>
@@ -45,11 +55,11 @@ function Cart() {
                     <tr>
                         <th />
                         <th>Total</th>
-                        <th>${totalPrice.toFixed(2)}</th>
+                        <th>${(calculateTotalPrice())}</th>
                     </tr>
                 </tfoot>
             </table>
-            
+            <button className="button is-primary" onClick={handleBuyClick}>Buy Now</button>
         </div>
 
     );

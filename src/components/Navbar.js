@@ -12,7 +12,7 @@ function Navbar() {
         navigate("/cart");
     };
 
-    let totalInCart = cart.orderProductsList.reduce((total, orderProduct) => Number(total) + Number(orderProduct.productQuantity), 0);
+    let totalInCart = cart.orderProductsList.reduce((total, orderProduct) => Number(total) + Number(orderProduct.orderProductQuantity), 0);
     let cartButtonText = totalInCart > 0 ? `Cart (${totalInCart})` : "Cart"
 
     return (

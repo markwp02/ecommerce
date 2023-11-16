@@ -33,7 +33,6 @@ function ProductDetailsPage() {
     };
     
     return (
-        <div className="flex items-center">
         <div className="card">
             <div className="card-content">
                 <div className="media">
@@ -57,13 +56,9 @@ function ProductDetailsPage() {
                     <div className="column">
                         <button disabled={outOfStock} className="button is-primary is-light" onClick={onAddToCartClick}>Add To Cart</button>
                     </div>
-
                 </div>
             </div>
-        </div>
-        </div>
-
-        
+        </div>        
     );
     
 

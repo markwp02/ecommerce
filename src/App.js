@@ -4,6 +4,7 @@ import Sidebar from "./components/Sidebar";
 import Route from "./components/Route";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import CartPage from "./pages/CartPage";
+import CustomerOrderPage from "./pages/CustomerOrderPage";
 
 function App() {
 
@@ -25,6 +26,9 @@ function App() {
             </Route>
             <Route regexPath="^/cart$">
                 <CartPage />
+            </Route>
+            <Route regexPath="^/customerOrder/[0123456789]+$">
+                <CustomerOrderPage />
             </Route>
         </div>
 

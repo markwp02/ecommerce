@@ -60,11 +60,6 @@ function ProductDetailsPage() {
             </div>
         </div>        
     );
-    
-
-    
-    
-
 };
 
 export default ProductDetailsPage;

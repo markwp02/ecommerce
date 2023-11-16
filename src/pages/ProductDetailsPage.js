@@ -4,7 +4,8 @@ import useNavigation from "../hooks/use-navigation";
 import getIdFromPath from "../hooks/get-id-from-path";
 import { addToCart } from "../store";
 
-function ProductDetails() {
+function ProductDetailsPage() {
+    const { navigate } = useNavigation();
     const dispatch = useDispatch();
     const { currentPath } = useNavigation();    
     const productId = getIdFromPath(currentPath);
@@ -25,8 +26,14 @@ function ProductDetails() {
     const onAddToCartClick = () => {
         dispatch(addToCart(data));
     };
+
+    const handleReturnClick = () => {
+        let homePath = '/';
+        navigate(homePath);
+    };
     
     return (
+        <div className="flex items-center">
         <div className="card">
             <div className="card-content">
                 <div className="media">
@@ -43,13 +50,19 @@ function ProductDetails() {
                     {lowStock && <p>Low Stock ({data.productStock})</p>}
                     {outOfStock && <p>Out of Stock</p>}
                 </div>
-                <div className="buttons">
-                        <button disabled={outOfStock} className="button is-primary is-light" onClick={onAddToCartClick}>
-                           Add To Cart
-                        </button>
+                <div className="columns">
+                    <div className="column is-three-quarters">
+                        <button className="button is-danger is-light" onClick={handleReturnClick}>Return</button>
                     </div>
+                    <div className="column">
+                        <button disabled={outOfStock} className="button is-primary is-light" onClick={onAddToCartClick}>Add To Cart</button>
+                    </div>
+
+                </div>
             </div>
         </div>
+        </div>
+
         
     );
     
@@ -59,4 +72,4 @@ function ProductDetails() {
 
 };
 
-export default ProductDetails;
+export default ProductDetailsPage;

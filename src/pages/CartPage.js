@@ -1,9 +1,11 @@
 import { useSelector, useDispatch } from "react-redux";
 import { updateProductQuantity, removeProductFromCart } from "../store";
 import { useAddCustomerOrderMutation } from "../store";
+import useNavigation from '../hooks/use-navigation';
 
 
-function Cart() {
+function CartPage() {
+    const { navigate } = useNavigation();
     const cart = useSelector((state) => state.cart);
     const [addCustomerOrder, results] = useAddCustomerOrderMutation();
     const dispatch = useDispatch();
@@ -15,6 +17,11 @@ function Cart() {
     const handleBuyClick = () => {
         let totalPrice = calculateTotalPrice();
         addCustomerOrder({ customerOrderTotalPrice: totalPrice, orderProducts: cart.orderProductsList});
+    };
+
+    const handleReturnClick = () => {
+        let homePath = '/';
+        navigate(homePath);
     };
 
     const handleDeleteClick = (productId) => {
@@ -59,10 +66,18 @@ function Cart() {
                     </tr>
                 </tfoot>
             </table>
-            <button className="button is-primary" onClick={handleBuyClick}>Buy Now</button>
+            <div className="columns">
+                <div className="column is-one-fifth">
+                    <button className="button is-danger" onClick={handleReturnClick}>Return</button>
+                </div>
+                <div className="column">
+                    <button className="button is-primary" onClick={handleBuyClick}>Buy Now</button>
+                </div>
+            </div>
+
         </div>
 
     );
 };
 
-export default Cart;
+export default CartPage;

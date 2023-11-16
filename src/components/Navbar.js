@@ -8,8 +8,14 @@ function Navbar() {
     const { navigate } = useNavigation();
     const cart = useSelector((state) => state.cart);
 
+    const onLogoClick = () => {
+        let homePath = '/';
+        navigate(homePath);
+    };
+
     const onCartClick = () => {
-        navigate("/cart");
+        let cartPagePath = '/cart';
+        navigate(cartPagePath);
     };
 
     let totalInCart = cart.orderProductsList.reduce((total, orderProduct) => Number(total) + Number(orderProduct.orderProductQuantity), 0);
@@ -17,9 +23,9 @@ function Navbar() {
 
     return (
         <div className="navbar">
-            <div className="navbar-item">
+            <button className="navbar-item" onClick={onLogoClick}>
                 eCommerce <GoGlobe />
-            </div>
+            </button>
             <div className="navbar-item">
                 <SearchProduct />
             </div>

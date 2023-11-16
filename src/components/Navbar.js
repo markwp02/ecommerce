@@ -3,7 +3,6 @@ import useNavigation from '../hooks/use-navigation';
 import SearchProduct from './SearchProduct';
 import { GoGlobe } from "react-icons/go";
 
-
 function Navbar() {
     const { navigate } = useNavigation();
     const cart = useSelector((state) => state.cart);

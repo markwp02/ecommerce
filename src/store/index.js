@@ -23,8 +23,8 @@ export const store = configureStore({
 
 setupListeners(store.dispatch);
 
-export { useAddCustomerOrderMutation } from './apis/customerOrderApi';
+export { useAddCustomerOrderMutation, useFetchCustomerOrderByIdQuery } from './apis/customerOrderApi';
 export { useFetchProductCategoriesQuery, useFetchProductsByCategoryQuery, useFetchProductByIdQuery } from './apis/productsApi';
 export { setSelected } from './slices/categoriesSlice';
-export { addToCart, updateProductQuantity, removeProductFromCart } from './slices/cartSlice';
+export { addToCart, updateProductQuantity, removeProductFromCart, resetCart } from './slices/cartSlice';
 export { setSearchTerm } from './slices/searchSlice';

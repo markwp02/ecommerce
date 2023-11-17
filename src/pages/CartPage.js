@@ -1,8 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
-import { updateProductQuantity, removeProductFromCart } from "../store";
-import { useAddCustomerOrderMutation } from "../store";
+import { updateProductQuantity, removeProductFromCart, resetCart, useAddCustomerOrderMutation} from "../store";
 import useNavigation from '../hooks/use-navigation';
-
 
 function CartPage() {
     const { navigate } = useNavigation();
@@ -14,9 +12,15 @@ function CartPage() {
         dispatch(updateProductQuantity({productId, newProductQuantity}));
     };
 
-    const handleBuyClick = () => {
-        let totalPrice = calculateTotalPrice();
-        addCustomerOrder({ customerOrderTotalPrice: totalPrice, orderProducts: cart.orderProductsList});
+    const handleBuyClick =  async () => {
+        let customerOrderTotalPrice = calculateTotalPrice();
+        let orderProducts = cart.orderProductsList;
+
+        const results = await addCustomerOrder({ customerOrderTotalPrice, orderProducts }).unwrap();
+
+        let customerOrderPath = `/customerOrder/${results.customerOrderId}`;
+        dispatch(resetCart());
+        navigate(customerOrderPath);
     };
 
     const handleReturnClick = () => {
@@ -43,6 +47,8 @@ function CartPage() {
             </tr>
         );
     });
+
+    let emptyCart = cart.orderProductsList.length === 0 ? true : false;
 
     return (
         <div>
@@ -71,12 +77,10 @@ function CartPage() {
                     <button className="button is-danger" onClick={handleReturnClick}>Return</button>
                 </div>
                 <div className="column">
-                    <button className="button is-primary" onClick={handleBuyClick}>Buy Now</button>
+                    <button className="button is-primary" disabled={emptyCart} onClick={handleBuyClick}>Buy Now</button>
                 </div>
             </div>
-
         </div>
-
     );
 };
 

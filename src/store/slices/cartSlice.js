@@ -34,6 +34,9 @@ export const cartSlice = createSlice({
         state.orderProductsList = state.orderProductsList.filter((orderProduct) => {
             return orderProduct.product.productId !== targetId;
         });
+    },
+    resetCart: (state, action) => {
+        state.orderProductsList = [];
     }
   },
 });
@@ -56,6 +59,6 @@ const isProductInCart = (orderProductsList, product) => {
 };
 
 // Action creators are generated for each case reducer function
-export const { addToCart, updateProductQuantity, removeProductFromCart } = cartSlice.actions;
+export const { addToCart, updateProductQuantity, removeProductFromCart, resetCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

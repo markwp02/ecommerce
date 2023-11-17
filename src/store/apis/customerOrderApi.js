@@ -14,14 +14,22 @@ const customerOrderApi = createApi({
                         method: 'POST',
                         body: {
                             customerOrderTotalPrice: customerOrder.customerOrderTotalPrice,
-                            orderProducts: customerOrder.orderProducts
+                            orderProducts: customerOrder.orderProducts,
                         }
                     }
+                },
+            }),
+            fetchCustomerOrderById: builder.query({
+                query: (customerOrderId) => {
+                    return {
+                        url: `/customerOrders/${customerOrderId}`,
+                        method: 'GET',
+                    };
                 },
             }),
         }
     },
 });
 
-export const { useAddCustomerOrderMutation } = customerOrderApi;
+export const { useAddCustomerOrderMutation, useFetchCustomerOrderByIdQuery } = customerOrderApi;
 export { customerOrderApi };

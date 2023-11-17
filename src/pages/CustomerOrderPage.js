@@ -16,6 +16,7 @@ function CustomerOrderPage() {
     const handleContinueShoppingClick = () => {
         let homePath = '/';
         navigate(homePath);
+        window.location.reload();
     };
 
     let tableRows = data.orderProducts.map(orderProduct => {

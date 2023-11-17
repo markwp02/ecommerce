@@ -50,7 +50,7 @@ function ProductDetailsPage() {
                     {outOfStock && <p>Out of Stock</p>}
                 </div>
                 <div className="columns">
-                    <div className="column is-three-quarters">
+                    <div className="column is-one-third">
                         <button className="button is-danger is-light" onClick={handleReturnClick}>Return</button>
                     </div>
                     <div className="column">

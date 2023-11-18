@@ -26,6 +26,6 @@ function LoginPage() {
         </div>
       </section>
     );
-}
+};
 
 export default LoginPage;

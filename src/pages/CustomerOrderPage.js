@@ -62,6 +62,6 @@ function CustomerOrderPage() {
             <a href={homePagePath} className="button is-primary" onClick={handleContinueShoppingClick}>Continue Shopping</a>
         </div>
     );
-}
+};
 
 export default CustomerOrderPage;

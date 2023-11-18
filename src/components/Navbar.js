@@ -19,6 +19,10 @@ function Navbar() {
        singlePageNavigation(event, cartPagePath);
     };
 
+    const onLoginPageClick = (event) => {
+        singlePageNavigation(event, loginPagePath);
+    }
+
     /**
      * Method to handle navigation
      * Meta key (Mac) and ctrl key (Windows) will use the href to navigate
@@ -55,7 +59,7 @@ function Navbar() {
                         <a href={signupPagePath} className="button is-primary">
                             <strong>Sign up</strong>
                         </a>
-                        <a href={loginPagePath} className="button is-light">
+                        <a href={loginPagePath} className="button is-light" onClick={onLoginPageClick}>
                             Log in
                         </a>
                     </div>

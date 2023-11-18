@@ -2,6 +2,7 @@ import useNavigation from '../hooks/use-navigation';
 import { useSelector, useDispatch } from "react-redux";
 import classNames from 'classnames';
 import { setSelected } from "../store";
+import { HOME_PAGE_PATH } from '../constants/PathConstants';
 
 function ShowCategory({ children, className, activeClassName }) {
     const { navigate } = useNavigation();
@@ -14,7 +15,7 @@ function ShowCategory({ children, className, activeClassName }) {
      */
     const handleClick = () => {
         dispatch(setSelected(children));
-        navigate("/");
+        navigate(HOME_PAGE_PATH);
     };
 
     const isActive = category.selected === children;

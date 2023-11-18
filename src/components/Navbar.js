@@ -2,25 +2,26 @@ import { useSelector } from 'react-redux';
 import useNavigation from '../hooks/use-navigation';
 import SearchProduct from './SearchProduct';
 import { GoGlobe } from "react-icons/go";
+import { CART_PAGE_PATH, SIGNUP_PAGE_PATH, LOGIN_PAGE_PATH, HOME_PAGE_PATH } from '../constants/PathConstants';
 
 function Navbar() {
     const { navigate } = useNavigation();
     const cart = useSelector((state) => state.cart);
-    const cartPagePath = '/cart';
-    const signupPagePath = '/signup';
-    const loginPagePath = '/login';
-    const homePath = '/';
 
     const onLogoClick = (event) => {
-        singlePageNavigation(event, homePath);
+        singlePageNavigation(event, HOME_PAGE_PATH);
     };
 
     const onCartClick = (event) => {
-       singlePageNavigation(event, cartPagePath);
+       singlePageNavigation(event, CART_PAGE_PATH);
     };
 
     const onLoginPageClick = (event) => {
-        singlePageNavigation(event, loginPagePath);
+        singlePageNavigation(event, LOGIN_PAGE_PATH);
+    }
+
+    const onSignupPageClick = (event) => {
+        singlePageNavigation(event, SIGNUP_PAGE_PATH);
     }
 
     /**
@@ -44,7 +45,7 @@ function Navbar() {
 
     return (
         <div className="navbar">
-            <a href={homePath} className="navbar-item" onClick={onLogoClick}>
+            <a href={HOME_PAGE_PATH} className="navbar-item" onClick={onLogoClick}>
                 eCommerce <GoGlobe />
             </a>
             <div className="navbar-item">
@@ -53,13 +54,13 @@ function Navbar() {
             <div className="navbar-end">
                 <div className="navbar-item">
                     <div className="buttons">
-                        <a href={cartPagePath} className="button is-light" onClick={onCartClick}>
+                        <a href={CART_PAGE_PATH} className="button is-light" onClick={onCartClick}>
                             {cartButtonText}
                         </a>
-                        <a href={signupPagePath} className="button is-primary">
+                        <a href={SIGNUP_PAGE_PATH} className="button is-primary" onClick={onSignupPageClick}>
                             <strong>Sign up</strong>
                         </a>
-                        <a href={loginPagePath} className="button is-light" onClick={onLoginPageClick}>
+                        <a href={LOGIN_PAGE_PATH} className="button is-light" onClick={onLoginPageClick}>
                             Log in
                         </a>
                     </div>

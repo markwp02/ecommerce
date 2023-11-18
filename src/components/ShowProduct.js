@@ -1,8 +1,9 @@
 import useNavigation from '../hooks/use-navigation';
+import { PRODUCT_DETAILS_BASE_PATH } from '../constants/PathConstants';
 
 function ShowProduct({children}) {
     const { navigate } = useNavigation();
-    let productPath = `/productdetails/${children.productId}`;
+    let productPath = `${PRODUCT_DETAILS_BASE_PATH}/${children.productId}`;
 
     const outOfStock = children.productStock === 0 ? true : false;
 

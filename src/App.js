@@ -5,6 +5,7 @@ import CartPage from "./pages/CartPage";
 import CustomerOrderPage from "./pages/CustomerOrderPage";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 
 function App() {
 
@@ -25,6 +26,9 @@ function App() {
             </Route>
             <Route regexPath="^/login">
                 <LoginPage />
+            </Route>
+            <Route regexPath="^/signup">
+                <SignupPage />
             </Route>
         </div>
 

@@ -1,12 +1,12 @@
 import { useFetchCustomerOrderByIdQuery } from "../store";
 import getIdFromPath from "../hooks/get-id-from-path";
 import useNavigation from "../hooks/use-navigation";
+import { HOME_PAGE_PATH } from "../constants/PathConstants";
 
 function CustomerOrderPage() {
     const { currentPath, navigate } = useNavigation();    
     const customerOrderId = getIdFromPath(currentPath);
     const {data, error, isFetching} = useFetchCustomerOrderByIdQuery(customerOrderId);
-    const homePagePath = '/';
 
     if (isFetching) {
         return <div>Is Loading product</div>
@@ -23,7 +23,7 @@ function CustomerOrderPage() {
         if (event.metaKey || event.ctrlKey) {
             return;
         }
-        navigate(homePagePath);
+        navigate(HOME_PAGE_PATH);
     };
 
     let tableRows = data.orderProducts.map(orderProduct => {
@@ -59,7 +59,7 @@ function CustomerOrderPage() {
                 </tfoot>
             </table>
             <p className="block">{data.orderStatus.orderStatusName}</p>
-            <a href={homePagePath} className="button is-primary" onClick={handleContinueShoppingClick}>Continue Shopping</a>
+            <a href={HOME_PAGE_PATH} className="button is-primary" onClick={handleContinueShoppingClick}>Continue Shopping</a>
         </div>
     );
 };

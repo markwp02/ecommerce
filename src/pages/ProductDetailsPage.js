@@ -3,13 +3,13 @@ import { useFetchProductByIdQuery } from "../store";
 import useNavigation from "../hooks/use-navigation";
 import getIdFromPath from "../hooks/get-id-from-path";
 import { addToCart } from "../store";
+import { HOME_PAGE_PATH } from "../constants/PathConstants";
 
 function ProductDetailsPage() {
     const { navigate } = useNavigation();
     const dispatch = useDispatch();
     const { currentPath } = useNavigation();    
     const productId = getIdFromPath(currentPath);
-    const homePagePath = '/';
 
     const {data, error, isFetching} = useFetchProductByIdQuery(productId);
 
@@ -41,7 +41,7 @@ function ProductDetailsPage() {
             return;
         }
         event.preventDefault();
-        navigate(homePagePath);
+        navigate(HOME_PAGE_PATH);
     };
     
     return (
@@ -63,7 +63,7 @@ function ProductDetailsPage() {
                 </div>
                 <div className="columns">
                     <div className="column is-one-third">
-                        <a href={homePagePath} className="button is-danger is-light" onClick={handleReturnClick}>Return</a>
+                        <a href={HOME_PAGE_PATH} className="button is-danger is-light" onClick={handleReturnClick}>Return</a>
                     </div>
                     <div className="column">
                         <button disabled={outOfStock} className="button is-primary is-light" onClick={onAddToCartClick}>Add To Cart</button>

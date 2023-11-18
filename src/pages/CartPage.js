@@ -1,13 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 import { updateProductQuantity, removeProductFromCart, resetCart, useAddCustomerOrderMutation} from "../store";
 import useNavigation from '../hooks/use-navigation';
+import { CUSTOMER_ORDER_BASE_PATH, HOME_PAGE_PATH } from "../constants/PathConstants";
 
 function CartPage() {
     const { navigate } = useNavigation();
     const cart = useSelector((state) => state.cart);
     const [addCustomerOrder, results] = useAddCustomerOrderMutation();
     const dispatch = useDispatch();
-    const homePagePath = '/'
 
     const handleEdit = (productId, newProductQuantity) => {
         dispatch(updateProductQuantity({productId, newProductQuantity}));
@@ -20,13 +20,13 @@ function CartPage() {
         const results = await addCustomerOrder({ customerOrderTotalPrice, orderProducts }).unwrap();
 
         dispatch(resetCart());
-        
-        let customerOrderPath = `/customerOrder/${results.customerOrderId}`;
+
+        let customerOrderPath = `${CUSTOMER_ORDER_BASE_PATH}/${results.customerOrderId}`;
         navigate(customerOrderPath);
     };
 
     const handleReturnClick = (event) => {
-        singlePageNavigation(event, homePagePath);
+        singlePageNavigation(event, HOME_PAGE_PATH);
     };
 
     /**
@@ -91,7 +91,7 @@ function CartPage() {
             </table>
             <div className="columns">
                 <div className="column is-one-fifth">
-                    <a href={homePagePath} className="button is-danger" onClick={handleReturnClick}>Return</a>
+                    <a href={HOME_PAGE_PATH} className="button is-danger" onClick={handleReturnClick}>Return</a>
                 </div>
                 <div className="column">
                     <button className="button is-primary" disabled={emptyCart} onClick={handleBuyClick}>Buy Now</button>

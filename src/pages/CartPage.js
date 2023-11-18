@@ -7,6 +7,7 @@ function CartPage() {
     const cart = useSelector((state) => state.cart);
     const [addCustomerOrder, results] = useAddCustomerOrderMutation();
     const dispatch = useDispatch();
+    const homePagePath = '/'
 
     const handleEdit = (productId, newProductQuantity) => {
         dispatch(updateProductQuantity({productId, newProductQuantity}));
@@ -18,15 +19,31 @@ function CartPage() {
 
         const results = await addCustomerOrder({ customerOrderTotalPrice, orderProducts }).unwrap();
 
-        let customerOrderPath = `/customerOrder/${results.customerOrderId}`;
         dispatch(resetCart());
+        
+        let customerOrderPath = `/customerOrder/${results.customerOrderId}`;
         navigate(customerOrderPath);
     };
 
-    const handleReturnClick = () => {
-        let homePath = '/';
-        navigate(homePath);
+    const handleReturnClick = (event) => {
+        singlePageNavigation(event, homePagePath);
     };
+
+    /**
+     * Method to handle navigation
+     * Meta key (Mac) and ctrl key (Windows) will use the href to navigate
+     * to a new tab.
+     * Prevent default to stop the app from refetching data from the server.
+     * @param {*} event 
+     * @returns 
+     */
+        const singlePageNavigation = (event, path) => {
+            if (event.metaKey || event.ctrlKey) {
+                return;
+            }
+            event.preventDefault();
+            navigate(path);
+        }
 
     const handleDeleteClick = (productId) => {
         dispatch(removeProductFromCart(productId));
@@ -74,7 +91,7 @@ function CartPage() {
             </table>
             <div className="columns">
                 <div className="column is-one-fifth">
-                    <button className="button is-danger" onClick={handleReturnClick}>Return</button>
+                    <a href={homePagePath} className="button is-danger" onClick={handleReturnClick}>Return</a>
                 </div>
                 <div className="column">
                     <button className="button is-primary" disabled={emptyCart} onClick={handleBuyClick}>Buy Now</button>

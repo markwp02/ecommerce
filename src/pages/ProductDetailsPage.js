@@ -9,6 +9,7 @@ function ProductDetailsPage() {
     const dispatch = useDispatch();
     const { currentPath } = useNavigation();    
     const productId = getIdFromPath(currentPath);
+    const homePagePath = '/';
 
     const {data, error, isFetching} = useFetchProductByIdQuery(productId);
 
@@ -27,9 +28,20 @@ function ProductDetailsPage() {
         dispatch(addToCart(data));
     };
 
-    const handleReturnClick = () => {
-        let homePath = '/';
-        navigate(homePath);
+    /**
+     * Method to handle navigation
+     * Meta key (Mac) and ctrl key (Windows) will use the href to navigate
+     * to a new tab.
+     * Prevent default to stop the app from refetching data from the server.
+     * @param {*} event 
+     * @returns 
+     */
+    const handleReturnClick = (event) => {
+        if (event.metaKey || event.ctrlKey) {
+            return;
+        }
+        event.preventDefault();
+        navigate(homePagePath);
     };
     
     return (
@@ -51,7 +63,7 @@ function ProductDetailsPage() {
                 </div>
                 <div className="columns">
                     <div className="column is-one-third">
-                        <button className="button is-danger is-light" onClick={handleReturnClick}>Return</button>
+                        <a href={homePagePath} className="button is-danger is-light" onClick={handleReturnClick}>Return</a>
                     </div>
                     <div className="column">
                         <button disabled={outOfStock} className="button is-primary is-light" onClick={onAddToCartClick}>Add To Cart</button>

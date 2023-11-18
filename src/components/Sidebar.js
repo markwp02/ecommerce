@@ -12,7 +12,7 @@ function Sidebar() {
         content = <div>Error loading categories.</div>
     } else {
         content = data.map(category => {
-            return <ShowCategory key={category} className="mb-3" activeClassName="font-bold border-l-4 border-blue-500 pl-2">{category}</ShowCategory>
+            return <ShowCategory key={category} className="mb-3 cursor-pointer text-blue-500" activeClassName="font-bold border-l-4 border-blue-500 pl-2">{category}</ShowCategory>
         });
     }
 

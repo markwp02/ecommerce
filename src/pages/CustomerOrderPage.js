@@ -6,6 +6,7 @@ function CustomerOrderPage() {
     const { currentPath, navigate } = useNavigation();    
     const customerOrderId = getIdFromPath(currentPath);
     const {data, error, isFetching} = useFetchCustomerOrderByIdQuery(customerOrderId);
+    const homePagePath = '/';
 
     if (isFetching) {
         return <div>Is Loading product</div>
@@ -13,10 +14,16 @@ function CustomerOrderPage() {
         return <div>Error loading product</div>
     } 
 
-    const handleContinueShoppingClick = () => {
-        let homePath = '/';
-        navigate(homePath);
-        window.location.reload();
+    /**
+     * Refresh on navigation to update the product stock
+     * @param {*} event 
+     * @returns 
+     */
+    const handleContinueShoppingClick = (event) => {
+        if (event.metaKey || event.ctrlKey) {
+            return;
+        }
+        navigate(homePagePath);
     };
 
     let tableRows = data.orderProducts.map(orderProduct => {
@@ -52,7 +59,7 @@ function CustomerOrderPage() {
                 </tfoot>
             </table>
             <p className="block">{data.orderStatus.orderStatusName}</p>
-            <button className="button is-primary" onClick={handleContinueShoppingClick}>Continue Shopping</button>
+            <a href={homePagePath} className="button is-primary" onClick={handleContinueShoppingClick}>Continue Shopping</a>
         </div>
     );
 }

@@ -6,6 +6,14 @@ function ShowProduct({children}) {
 
     const outOfStock = children.productStock === 0 ? true : false;
 
+    /**
+     * Method to handle navigation
+     * Meta key (Mac) and ctrl key (Windows) will use the href to navigate
+     * to a new tab.
+     * Prevent default to stop the app from refetching data from the server.
+     * @param {*} event 
+     * @returns 
+     */
     const handleClick = (event) => {
         if (event.metaKey || event.ctrlKey) {
             return;

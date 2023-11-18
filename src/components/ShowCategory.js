@@ -8,6 +8,10 @@ function ShowCategory({ children, className, activeClassName }) {
     const category = useSelector((state) => state.categories);
     const dispatch = useDispatch();
     
+    /**
+     * Don't allow opening a new tab with meta, or ctrl keys, as the
+     * selected child needs to be set to selected state
+     */
     const handleClick = () => {
         dispatch(setSelected(children));
         navigate("/");
@@ -16,7 +20,6 @@ function ShowCategory({ children, className, activeClassName }) {
     const isActive = category.selected === children;
 
     const classes = classNames(
-        'text-blue-500', 
         className,
         isActive && activeClassName
     );

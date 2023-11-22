@@ -26,7 +26,9 @@ function ShowProduct({children}) {
     return (
     <a href={productPath} className="card cursor-pointer" onClick={handleClick}>
         <div className="card-image">
-            <img alt={children.productName} src={children.productImageUrl}/>
+            <figure className="image is-4by3">
+                <img alt={children.productName} src={children.productImageUrl}/>
+            </figure>
         </div>
         <div className="card-content">
             <div className="media">

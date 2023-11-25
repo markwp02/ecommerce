@@ -7,6 +7,10 @@ import { CART_PAGE_PATH, SIGNUP_PAGE_PATH, LOGIN_PAGE_PATH, HOME_PAGE_PATH } fro
 function Navbar() {
     const { navigate } = useNavigation();
     const cart = useSelector((state) => state.cart);
+    const customer = useSelector((state) => state.customer);
+
+    const loggedInCustomer = customer.loggedIn;
+    const isLoggedIn = loggedInCustomer.customerId != null ? true: false;
 
     const onLogoClick = (event) => {
         singlePageNavigation(event, HOME_PAGE_PATH);
@@ -43,6 +47,37 @@ function Navbar() {
     let totalInCart = cart.orderProductsList.reduce((total, orderProduct) => Number(total) + Number(orderProduct.orderProductQuantity), 0);
     let cartButtonText = totalInCart > 0 ? `Cart (${totalInCart})` : "Cart"
 
+    let loginContent = (
+        <div>
+            <a href={SIGNUP_PAGE_PATH} className="button is-primary" onClick={onSignupPageClick}>
+                <strong>Sign up</strong>
+            </a>
+            <a href={LOGIN_PAGE_PATH} className="button is-light" onClick={onLoginPageClick}>
+                Log in
+            </a>
+        </div>
+    );
+    
+    let customerContent = (
+        <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link" href="#">
+            {loggedInCustomer.customerFirstName}
+            </a>
+            <div class="navbar-dropdown is-boxed">
+                <a class="navbar-item" href="#">
+                Details
+                </a>
+                <a class="navbar-item" href="#">
+                Orders
+                </a>
+                <a class="navbar-item" href="#">
+                Log out
+                </a>
+            </div>
+        </div>
+    );
+
+
     return (
         <div className="navbar">
             <a href={HOME_PAGE_PATH} className="navbar-item" onClick={onLogoClick}>
@@ -57,14 +92,10 @@ function Navbar() {
                         <a href={CART_PAGE_PATH} className="button is-light" onClick={onCartClick}>
                             {cartButtonText}
                         </a>
-                        <a href={SIGNUP_PAGE_PATH} className="button is-primary" onClick={onSignupPageClick}>
-                            <strong>Sign up</strong>
-                        </a>
-                        <a href={LOGIN_PAGE_PATH} className="button is-light" onClick={onLoginPageClick}>
-                            Log in
-                        </a>
+                        {!isLoggedIn && loginContent}
                     </div>
                 </div>
+                {isLoggedIn && customerContent}
             </div>
         </div>
     );

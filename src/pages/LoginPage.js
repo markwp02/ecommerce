@@ -14,7 +14,6 @@ function LoginPage() {
     const hasLoginError = loginError.length > 0 ? true : false;
 
     const handleLoginClick = async(event) => {
-        //TODO: Implement OAuth2 authentication, as the industry standard
         event.preventDefault();
 
         let Customer = { customerUsername: event.target[0].value, customerPassword: event.target[1].value };

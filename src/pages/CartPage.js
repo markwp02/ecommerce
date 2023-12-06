@@ -21,7 +21,7 @@ function CartPage() {
 
         dispatch(resetCart());
 
-        let customerOrderPath = `${CUSTOMER_ORDER_BASE_PATH}/${results.customerOrderId}`;
+        let customerOrderPath = `${CUSTOMER_ORDER_BASE_PATH}${results.customerOrderId}`;
         navigate(customerOrderPath);
     };
 
